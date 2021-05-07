@@ -6,7 +6,7 @@ module.exports = {
 
     const [count] = await connection("incidents").count();
 
-    const incidents = await connection("incidents")    
+    const incidents = await connection("incidents")
       .join("ongs", "ongs.id", "=", "incidents.ong_id")
       .limit(5)
       .offset((page - 1) * 5)
@@ -18,7 +18,7 @@ module.exports = {
         "ongs.city",
         "ongs.uf",
       ]);
-      res.header("X-Total-Count", count["count(*)"]);
+    res.header("X-Total-Count", count["count(*)"]);
 
     return res.json(incidents);
   },
@@ -36,6 +36,7 @@ module.exports = {
 
     return res.json({ id });
   },
+
   async delete(req, res) {
     const { id } = req.params;
     const ong_id = req.headers.authorization;
